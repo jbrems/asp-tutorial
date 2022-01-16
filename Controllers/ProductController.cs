@@ -19,15 +19,29 @@ namespace asp_tutorial.Controllers {
         public ProductService ProductService { get; }
 
         [HttpGet]
-        public IEnumerable<Product> GetProducts () {
+        public IEnumerable<Product> GetProducts() {
             return ProductService.GetProducts();
         }
 
-        [Route("rate")]
+        [Route("{ProductId}")]
         [HttpGet]
-        public ActionResult AddRating ([FromQuery] string ProductId, [FromQuery] int Rating)
+        public Product GetProduct([FromRoute] string ProductId)
         {
-            ProductService.AddRating(ProductId, Rating);
+            return ProductService.GetProducts().First(product => product.Id == ProductId);
+        }
+
+        [Route("{ProductId}/ratings")]
+        [HttpGet]
+        public int[] GetRatings([FromRoute] string ProductId)
+        {
+            return ProductService.GetProducts().First(product => product.Id == ProductId).Ratings;
+        }
+
+        [Route("{ProductId}/ratings")]
+        [HttpPost]
+        public ActionResult AddRating ([FromRoute] string ProductId, [FromForm] int rating)
+        {
+            ProductService.AddRating(ProductId, rating);
             return Ok();
         }
     }
