@@ -1,4 +1,10 @@
-﻿## REST API
+﻿# ASP Tutrorial
+
+My first introduction to ASP and .NET since learning it in school about 13 years ago.
+
+I followed [this tutorial](https://docs.microsoft.com/nl-nl/shows/ASPNET-Core-101/).
+
+## REST API
 
 Visit `https://localhost:5001/products` to retrieve a list of all products.
 
