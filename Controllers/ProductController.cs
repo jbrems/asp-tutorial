@@ -28,28 +28,28 @@ namespace asp_tutorial.Controllers {
             return ProductService.GetProducts();
         }
 
-        [Route("{ProductId}")]
+        [Route("{productId}")]
         [HttpGet]
-        public Product GetProduct([FromRoute] string ProductId)
+        public Product GetProduct([FromRoute] string productId)
         {
-            _logger.LogInformation($"Retrieving product with id {ProductId}");
-            return ProductService.GetProducts().First(product => product.Id == ProductId);
+            _logger.LogInformation($"Retrieving product with id {productId}");
+            return ProductService.GetProduct(productId);
         }
 
-        [Route("{ProductId}/ratings")]
+        [Route("{productId}/ratings")]
         [HttpGet]
-        public int[] GetRatings([FromRoute] string ProductId)
+        public int[] GetRatings([FromRoute] string productId)
         {
-            _logger.LogInformation($"Retrieving ratings for product with id {ProductId}");
-            return ProductService.GetProducts().First(product => product.Id == ProductId).Ratings;
+            _logger.LogInformation($"Retrieving ratings for product with id {productId}");
+            return ProductService.GetProduct(productId).Ratings;
         }
 
-        [Route("{ProductId}/ratings")]
+        [Route("{productId}/ratings")]
         [HttpPost]
-        public ActionResult AddRating ([FromRoute] string ProductId, [FromForm] int rating)
+        public ActionResult AddRating ([FromRoute] string productId, [FromForm] int rating)
         {
-            _logger.LogInformation($"Adding rating {rating} to product with id {ProductId}");
-            ProductService.AddRating(ProductId, rating);
+            _logger.LogInformation($"Adding rating {rating} to product with id {productId}");
+            ProductService.AddRating(productId, rating);
             return Ok();
         }
     }

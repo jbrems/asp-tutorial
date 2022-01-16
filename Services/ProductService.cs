@@ -33,6 +33,11 @@ namespace asp_tutorial.Services
             }
         }
 
+        public Product GetProduct(string productId)
+        {
+            return GetProducts().First<Product>(product => product.Id == productId);
+        }
+
         public void AddRating(string productId, int rating)
         {
             var products = GetProducts();
